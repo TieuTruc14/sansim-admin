@@ -1,0 +1,120 @@
+
+/** manhpt - fix table overflow horizontal */
+.table-overflow-x-fix {
+    overflow-x: scroll;
+}
+
+.panel .table td, .panel .table th {
+    padding: 6px 6px;
+    border-top: 1px solid #e1e1e1;
+}
+
+.box-shadow-inner {
+    -webkit-box-shadow: inset 0px 0px 20px rgba(0,0,0,0.1);
+    box-shadow: inset 0px 0px 20px rgba(0,0,0,0.1);
+}
+
+.logo-menu{
+    /* background-image: url('/fms/assets/images/bg_logo.png')!important ;*/
+    background-size: 100% 100%;
+}
+.menu-header{
+    background-image: url('/assets/images/bg_header.png')!important;
+    background-repeat:repeat-x!important;
+}
+.menu-header a{
+    color:#ffffff;
+    max-height:100px;
+}
+.menu-header a:hover{
+    color:#ffffff;
+    max-height:100px;
+}
+.menu-header-right {
+    background: none!important;
+}
+.menu-header-right a:hover{
+    color:#ffffff;
+}
+.menu-header-right a{
+    color:#ffffff;
+}
+@media (min-width: 768px){
+    .menu-header-right  {
+        padding-top: 15px!important;
+        padding-bottom: 0px!important;
+    }
+}
+.logo-menu{
+    background-image: url('/assets/images/bg_logo.png')!important ;
+    background-size: 100% 100%;
+}
+
+.none-box{
+    border: none!important;
+    box-shadow: none;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0)!important;
+}
+.menu-header-login{
+    /*background-image: url('/fms/assets/images/vehicle-tracking.png')!important;*/
+    background-repeat:no-repeat/*repeat-x!important*/;
+}
+
+.logo-menu-login{
+    background-image: url('/assets/images/v.png')!important ;
+    background-size: 100% 100%;
+    margin:0 auto!important;
+    height: 300px;
+}
+@media screen and (max-width: 850px) {
+    .logo-menu-login{
+        display: none;
+    }
+}
+
+.image-login1{
+    width:70%;
+    height:170px;
+    background-image:  url('/assets/images/dog1.jpg');
+    background-size: 100% 100%;
+    margin-top:28px;
+    float: right;
+}
+.image-login3{
+    width:20%;
+    height:170px;
+    margin-top:28px;
+}
+.image-login2{
+    width:70%;
+    height:170px;
+    background-image:  url('/assets/images/dog2.jpg');
+    background-size: 100% 100%;
+    margin-top:28px;
+}
+.bottom-login{
+    margin-bottom:0px!important;
+}
+.topIndex{
+    z-index: 9999!important;
+}
+.botIndex{
+    z-index:1!important;
+}
+.relative{
+    position: relative;
+}
+.color-black{
+    color: #000000;
+}
+.logo_fms{
+    max-height: 50px!important;
+}
+
+ /*huy bo scroll trong table o ban update 2.0. Nhung luu � neu la mobile co the se bi co chu ko xem full d�i dc*/
+ .table-responsive{
+     overflow-x: visible;
+ }
+
+.errorMessage{list-style: none;}
+.dataTables_info{display: none;}

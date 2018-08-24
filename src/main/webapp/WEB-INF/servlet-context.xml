@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:task="http://www.springframework.org/schema/task"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans.xsd
+    	 http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+    	http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context.xsd
+    	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/aop
+     	http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Step 3: Add support for component scanning -->
+	<context:component-scan base-package="com.osp" />
+
+	<!-- Step 4: Add support for conversion, formatting and validation support -->
+	<mvc:annotation-driven/>
+	<!--khai bao spring quan ly transaction-->
+	<!--<tx:annotation-driven />-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<context:annotation-config/>
+
+	<mvc:resources mapping="/assets/**" location="/assets/" />
+	<mvc:resources mapping="/images/**" location="/assets/upload" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles.xml"/>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- setting maximum upload size -->
+		<property name="maxUploadSize" value="20000000" />
+	</bean>
+
+	<!-- This produces a container-managed EntityManagerFactory;
+         rather than application-managed EntityManagerFactory as in case of LocalEntityManagerFactoryBean-->
+	<bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- This makes /META-INF/persistence.xml is no longer necessary -->
+		<property name="packagesToScan" value="com.osp.model" />
+		<property name="persistenceUnitName" value="appAdmin" />
+		<!-- JpaVendorAdapter implementation for Hibernate EntityManager.
+             Exposes Hibernate's persistence provider and EntityManager extension interface -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.dialect">${oracle.hibernate.dialect}</prop>
+				<prop key="hibernate.query.substitutions">true 'T', false 'F'</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.charSet">utf8</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.connection.characterEncoding">utf8</prop>
+				<!--after_transaction or on_close-->
+				<prop key="hibernate.connection.release_mode">on_close</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+				<prop key="cache.use_minimal_puts">false</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryBean" />
+	</bean>
+
+	<!-- DA T A  S O U R C E -->
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${oracle.driverClass}"></property>
+		<property name="url" value="${oracle.url}" />
+		<property name="username" value="${oracle.username}" />
+		<property name="password" value="${oracle.password}" />
+	</bean>
+	<!--CONFIG -->
+	<context:property-placeholder location="classpath:config.properties,classpath:messages.properties,classpath:system.properties"/>
+
+	<!--config validator message-->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="basename" value="messages"/>
+	</bean>
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"/>
+	</bean>
+<!--CONFIG FOR DB SANSIM CUSTOMER-->
+	<bean id="entityManagerFactoryBeanCustomer" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSourceCustomer" />
+		<!-- This makes /META-INF/persistence.xml is no longer necessary -->
+		<property name="packagesToScan" value="com.osp.modelCustomer" />
+		<property name="persistenceUnitName" value="appCustomer" />
+		<!-- JpaVendorAdapter implementation for Hibernate EntityManager.
+             Exposes Hibernate's persistence provider and EntityManager extension interface -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.dialect">${oracle.customer.hibernate.dialect}</prop>
+				<prop key="hibernate.query.substitutions">true 'T', false 'F'</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.charSet">utf8</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
+				<prop key="hibernate.connection.characterEncoding">utf8</prop>
+				<!--after_transaction or on_close-->
+				<prop key="hibernate.connection.release_mode">on_close</prop>
+				<prop key="hibernate.generate_statistics">false</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+				<!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+				<prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+				<prop key="cache.use_minimal_puts">false</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManagerCustomer" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactoryBeanCustomer" />
+	</bean>
+	<!-- DA T A  S O U R C E -->
+	<bean id="dataSourceCustomer" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${oracle.customer.driverClass}"></property>
+		<property name="url" value="${oracle.customer.url}" />
+		<property name="username" value="${oracle.customer.username}" />
+		<property name="password" value="${oracle.customer.password}" />
+	</bean>
+	<!--END CONFIG DB SANSIM CUSTOMER-->
+
+	<!--for @scheduled-->
+	<task:annotation-driven/>
+
+</beans>
+
+
+
+
+

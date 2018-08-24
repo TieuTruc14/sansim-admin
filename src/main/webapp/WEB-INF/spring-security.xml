@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:s="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <s:http pattern="/assets/**" security="none"/>
+    <s:http pattern="/login" security="none"/>
+    <s:http auto-config='true' use-expressions="true">
+        <s:intercept-url pattern="/**" access="isAuthenticated()" />
+        <s:intercept-url pattern="/assets/**" access="permitAll()" />
+        <s:form-login login-page="/login" default-target-url="/" login-processing-url="/j_spring_security_check" always-use-default-target="true"
+                      username-parameter="username" password-parameter="password" authentication-success-handler-ref="beanCustomAuthenticationSuccessHandler"/>
+        <s:anonymous />
+        <s:logout  logout-url="/j_spring_security_logout" delete-cookies="true" invalidate-session="true" success-handler-ref="beanMyLogoutSuccessHandler"></s:logout>
+        <s:csrf disabled="true"/>
+        <s:remember-me
+                token-validity-seconds="864000"
+                remember-me-parameter="remember-me"
+                remember-me-cookie="remember-me"
+                data-source-ref="dataSource" />
+    </s:http>
+    <!--Dam bao security global tren cac method-->
+    <!--<s:global-method-security pre-post-annotations="enabled"/>-->
+    <s:global-method-security
+            pre-post-annotations="enabled" secured-annotations="enabled" />
+    <s:authentication-manager alias="authenticationManager">
+        <s:authentication-provider user-service-ref="beanUchiUserDetailsService">
+            <s:password-encoder ref="bcryptEncoder"/>
+        </s:authentication-provider>
+    </s:authentication-manager>
+    <!--<s:authentication-manager><s:authentication-provider user-service-ref="beanUchiUserDetailsService" /></s:authentication-manager>-->
+    <bean id="beanUchiUserDetailsService" class="com.osp.security.SanSimUserDetailsService" scope="singleton" />
+    <bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    <bean id="beanCustomAuthenticationSuccessHandler" class="com.osp.security.MyAuthenticationSuccessHandler" />
+    <bean id="beanMyLogoutSuccessHandler" class="com.osp.security.MyLogoutSuccessHandler" />
+    <!--<bean id="beanCustomFailureHandler" class="com.osp.security.CustomAuthenticationFailureHandler" />-->
+
+
+</beans>

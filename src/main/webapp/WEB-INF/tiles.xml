@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="default" template="/WEB-INF/views/layout/layout.jsp">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+        <put-attribute name="leftpanel" value="/WEB-INF/views/layout/leftpanel.jsp" />
+        <put-attribute name="page" value="/WEB-INF/views/layout/blank.jsp" />
+    </definition>
+
+    <definition name="index" extends="default">
+        <put-attribute name="title" value="San sim so"/>
+        <put-attribute name="page" value="/WEB-INF/views/index.jsp" />
+    </definition>
+
+    <definition name="login" template="/WEB-INF/views/login.jsp">
+    </definition>
+
+    <definition name="404" template="/WEB-INF/views/404.jsp">
+    </definition>
+
+    <definition name="dashboard" extends="default">
+        <put-attribute name="title" value="San sim so"/>
+        <put-attribute name="page" value="/WEB-INF/views/dashboard/dashboard.jsp" />
+    </definition>
+    <!--MANAGER-->
+    <!--package-->
+    <definition name="package.list" extends="default">
+        <put-attribute name="title" value="Danh sách gói phí"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/package/list.jsp" />
+    </definition>
+    <definition name="package.add" extends="default">
+        <put-attribute name="title" value="Thêm gói phí"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/package/add.jsp" />
+    </definition>
+    <definition name="package.edit" extends="default">
+        <put-attribute name="title" value="Sửa gói phí"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/package/edit.jsp" />
+    </definition>
+
+    <!--customer-->
+    <definition name="customer.list" extends="default">
+        <put-attribute name="title" value="Danh sách khách hàng"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/customer/list.jsp" />
+    </definition>
+    <!--msisdn-->
+    <definition name="msisdn.list" extends="default">
+        <put-attribute name="title" value="Quản lý đăng số"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/msisdn/list.jsp" />
+    </definition>
+    <definition name="msisdn.detail" extends="default">
+        <put-attribute name="title" value="Chi tiết thuê bao"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/msisdn/detail.jsp" />
+    </definition>
+    <!--pack-cus-->
+    <definition name="pack.cus.list" extends="default">
+        <put-attribute name="title" value="Quản lý gói cước"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/transpay/list.jsp" />
+    </definition>
+    <!--MO/MT-->
+    <definition name="momt.list" extends="default">
+        <put-attribute name="title" value="Tra cứu MO/MT"/>
+        <put-attribute name="page" value="/WEB-INF/views/manager/momt/list.jsp" />
+    </definition>
+    <!--SYSTEM-->
+    <definition name="user.list" extends="default">
+        <put-attribute name="title" value="Danh sách người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/user/list.jsp" />
+    </definition>
+    <definition name="user.add" extends="default">
+        <put-attribute name="title" value="Thêm mới người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/user/add.jsp" />
+    </definition>
+    <definition name="user.edit" extends="default">
+        <put-attribute name="title" value="Sửa người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/user/edit.jsp" />
+    </definition>
+    <definition name="user.group" extends="default">
+        <put-attribute name="title" value="Sửa người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/user/user.group.jsp" />
+    </definition>
+    <definition name="user.change.pass" extends="default">
+        <put-attribute name="title" value="Đổi mật khẩu"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/user/change.my.pass.jsp" />
+    </definition>
+
+    <!--Authority-->
+    <definition name="group.list" extends="default">
+        <put-attribute name="title" value="Nhóm quyền"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/group/list.jsp" />
+    </definition>
+    <definition name="group.add" extends="default">
+        <put-attribute name="title" value="Thêm nhóm quyền"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/group/add.jsp" />
+    </definition>
+    <definition name="group.edit" extends="default">
+        <put-attribute name="title" value="Sửa nhóm quyền"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/group/edit.jsp" />
+    </definition>
+    <!--log-->
+    <definition name="log.list" extends="default">
+        <put-attribute name="title" value="Lịch sử hệ thống"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/log/list.jsp" />
+    </definition>
+    <definition name="log.user" extends="default">
+        <put-attribute name="title" value="Lịch sử chi tiết người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/log/log.user.jsp" />
+    </definition>
+    <definition name="my.history" extends="default">
+        <put-attribute name="title" value="Lịch sử chi tiết người dùng"/>
+        <put-attribute name="page" value="/WEB-INF/views/system/log/my.history.jsp" />
+    </definition>
+
+    <!--REPORT-->
+    <definition name="report.general.sale.sms" extends="default">
+        <put-attribute name="title" value="Báo cáo tổng hợp doanh thu sms"/>
+        <put-attribute name="page" value="/WEB-INF/views/report/general.sale.sms.jsp" />
+    </definition>
+    <definition name="report.detail.sale.sms" extends="default">
+        <put-attribute name="title" value="Báo cáo chi tiết doanh thu sms"/>
+        <put-attribute name="page" value="/WEB-INF/views/report/detail.sale.sms.jsp" />
+    </definition>
+    <definition name="report.general.trade" extends="default">
+        <put-attribute name="title" value="Báo cáo tổng hợp lượng giao dịch"/>
+        <put-attribute name="page" value="/WEB-INF/views/report/general.trade.jsp" />
+    </definition>
+    <definition name="report.detail.trade" extends="default">
+        <put-attribute name="title" value="Báo cáo chi tiết lượng giao dịch"/>
+        <put-attribute name="page" value="/WEB-INF/views/report/detail.trade.jsp" />
+    </definition>
+    <definition name="report.crud.msisdn" extends="default">
+        <put-attribute name="title" value="Báo cáo thêm xóa thuê bao"/>
+        <put-attribute name="page" value="/WEB-INF/views/report/crud.msisdn.jsp" />
+    </definition>
+
+    <!--CATEGORY-->
+    <definition name="category.group.price.list" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo giá"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupprice/list.jsp" />
+    </definition>
+    <definition name="category.group.price.add" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo giá"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupprice/add.jsp" />
+    </definition>
+    <definition name="category.group.price.edit" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo giá"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupprice/edit.jsp" />
+    </definition>
+
+    <definition name="category.group.year.list" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo năm"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupyear/list.jsp" />
+    </definition>
+    <definition name="category.group.year.add" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo năm"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupyear/add.jsp" />
+    </definition>
+    <definition name="category.group.year.edit" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo năm"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/groupyear/edit.jsp" />
+    </definition>
+
+    <definition name="category.group.type.list" extends="default">
+        <put-attribute name="title" value="Danh mục sim theo loại"/>
+        <put-attribute name="page" value="/WEB-INF/views/category/grouptype/list.jsp" />
+    </definition>
+
+    <!--CONTENT-->
+    <definition name="content.category.list" extends="default">
+        <put-attribute name="title" value="Danh sách chuyên mục"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/category/list.jsp" />
+    </definition>
+    <definition name="content.category.add" extends="default">
+        <put-attribute name="title" value="Thêm chuyên mục"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/category/add.jsp" />
+    </definition>
+    <definition name="content.category.edit" extends="default">
+        <put-attribute name="title" value="Sửa chuyên mục"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/category/edit.jsp" />
+    </definition>
+
+    <definition name="content.article.list" extends="default">
+        <put-attribute name="title" value="Danh sách bài viết"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/article/list.jsp" />
+    </definition>
+    <definition name="content.article.add" extends="default">
+        <put-attribute name="title" value="Thêm bài viết"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/article/add.jsp" />
+    </definition>
+    <definition name="content.article.edit" extends="default">
+        <put-attribute name="title" value="Sửa bài viết"/>
+        <put-attribute name="page" value="/WEB-INF/views/content/article/edit.jsp" />
+    </definition>
+
+</tiles-definitions>
